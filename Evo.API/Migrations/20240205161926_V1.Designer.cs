@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evo.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240205002404_V1")]
+    [Migration("20240205161926_V1")]
     partial class V1
     {
         /// <inheritdoc />

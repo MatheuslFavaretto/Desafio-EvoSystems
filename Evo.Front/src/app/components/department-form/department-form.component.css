@@ -1,0 +1,44 @@
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .form-container input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .form-container button[type="submit"] {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-container button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  
+  .form-container input::placeholder {
+    color: #888;
+  }
+  
+  /* Ajustes para foco no input */
+  .form-container input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    outline: none;
+  }
+  

@@ -1,0 +1,33 @@
+<div class="funcionario-container">
+    <h2>{{ departamentoNome }}</h2>
+    <div class="create-bar-funcionario">
+      <button (click)="adicionarFuncionario()">Adicionar Funcionário</button>
+    </div>
+    <div *ngIf="exibirFormularioModal">
+        <app-employee-form>        </app-employee-form>
+  </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do Funcionário</th>
+          <th>RG do Funcionário</th>
+          <th>Foto do Funcionário</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.nome }}</td>
+          <td>{{ employee.rg | rgFormat }}</td>
+          <img *ngIf="employee.foto" [src]="'http://localhost:5233/' + employee.foto" class="img-thumbnail" style="width: 150px;" alt="Foto do Funcionário">
+          <td>
+            <button (click)="editarFuncionario(employee)">Editar</button>
+            <button (click)="excluirFuncionario(employee.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

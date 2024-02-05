@@ -1,0 +1,23 @@
+<!-- department-list.component.html -->
+<div class="department-container">
+  <div class="create-bar">
+    <button (click)="createDepartment()">Criar Departamento</button>
+  </div>
+  <div *ngIf="showModal" class="department-form">
+    <app-department-form [departamento]="departmentEditing" (fecharFormulario)="closeModal()"></app-department-form>
+  </div>
+</div>
+
+<div class="cards-container">
+  <div class="department-card" *ngFor="let department of departments">
+    <div class="card-content">
+      <h3>{{ department.nome }}</h3>
+      <p>{{ department.sigla }}</p>
+    </div>
+    <div class="card-actions">
+      <button (click)="editDepartment(department); $event.stopPropagation()">Editar</button>
+      <button (click)="deleteDepartment(department.id); $event.stopPropagation()">Excluir</button>
+      <button (click)="viewEmployees(department.id); $event.stopPropagation()">Ver</button>
+    </div>
+  </div>
+</div>

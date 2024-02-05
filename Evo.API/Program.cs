@@ -1,4 +1,3 @@
-
 using Evo.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -16,14 +15,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString); // Ajuste conforme o seu banco de dados
 });
 
-
-// Configuração do CORS
+// Configuração do CORS para permitir qualquer origem
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularApp",
-        builder => builder.WithOrigins("http://localhost:4200") // Adapte conforme necessário
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+    options.AddPolicy("AllowAnyOrigin", builder =>
+    {
+        builder
+            .AllowAnyOrigin() // Permitir qualquer origem
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
 });
 
 var app = builder.Build();
@@ -31,8 +32,7 @@ var app = builder.Build();
 // Configura o pipeline de solicitação HTTP.
 app.UseHttpsRedirection();
 
-// Aplica a configuração do CORS - Deve estar antes de UseRouting()
-app.UseCors("AllowAngularApp");
+
 
 // Configuração para servir arquivos estáticos da pasta wwwroot
 app.UseStaticFiles();
@@ -49,11 +49,8 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(uploadPath),
     RequestPath = "/uploads"
 });
-
-
+app.UseCors("AllowAngularApp");
 app.UseRouting();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

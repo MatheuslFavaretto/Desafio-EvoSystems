@@ -1,0 +1,8 @@
+<div class="form-container">
+    <form [formGroup]="departamentoForm" (ngSubmit)="salvar()">
+      <input formControlName="nome" type="text" placeholder="Nome do Departamento">
+      <input formControlName="sigla" type="text" placeholder="Sigla do Departamento">
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+  

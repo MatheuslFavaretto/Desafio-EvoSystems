@@ -93,11 +93,26 @@ namespace Evo.API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int departmentId, int id, [FromBody] Employee employeeUpdate)
+        public async Task<IActionResult> Update(int departmentId, int id, [FromForm] IFormFile foto, [FromForm] string employeeJson)
         {
             if (!await DepartmentExists(departmentId) || !await EmployeeExists(id))
             {
                 return NotFound($"Employee with ID {id} not found in department {departmentId}.");
+            }
+
+            EmployeeViewModel employeeViewModel;
+            try
+            {
+                employeeViewModel = JsonSerializer.Deserialize<EmployeeViewModel>(employeeJson);
+            }
+            catch (JsonException)
+            {
+                return BadRequest("Erro ao desserializar os dados do funcionário.");
+            }
+
+            if (employeeViewModel == null)
+            {
+                return BadRequest("Dados do funcionário inválidos.");
             }
 
             var employee = await _context.Employees.FindAsync(id);
@@ -106,8 +121,15 @@ namespace Evo.API.Controllers
                 return NotFound();
             }
 
-            employee.nome = employeeUpdate.nome;
-            employee.rg = employeeUpdate.rg;
+            employee.nome = employeeViewModel.nome;
+            employee.rg = employeeViewModel.rg;
+
+            // Atualize a foto se necessário
+            if (foto != null && foto.Length > 0)
+            {
+                var fileName = await SaveFileAsync(foto);
+                employee.foto = Path.Combine("uploads", fileName); 
+            }
 
             _context.Entry(employee).State = EntityState.Modified;
 
@@ -129,6 +151,7 @@ namespace Evo.API.Controllers
 
             return NoContent();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int departmentId, int id)
