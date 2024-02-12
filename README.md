@@ -11,7 +11,7 @@ Este repositório contém o código-fonte de um Desafio para criar uma aplicaç�
 
 
 
-## Diagrama de Classes (Domínio da API)
+## Diagrama de Classes 
 
 ```mermaid
 classDiagram
@@ -37,6 +37,7 @@ classDiagram
 
 # Em Angular
 
-A aplicação possui uma tela para listar departamentos, com opções de cadastrar, editar e deletar. Ao selecionar um departamento, é redirecionado para uma lista de funcionários desse departamento, onde deve haver opções para cadastrar, editar e deletar um funcionário.
+A aplicação possui uma tela para listar departamentos, com opções de cadastrar, editar e deletar. 
+Ao selecionar um departamento, é redirecionado para uma lista de funcionários desse departamento, onde deve haver opções para cadastrar, editar e deletar um funcionário.
 
 
